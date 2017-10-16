@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.devMode" value="true"/>
+
+
+    <!-- 如果当前 package 有需要 result 返回 json 数据的, 则继承 json-default -->
+    <package name="day05" extends="json-default">
+        <action name="findDepartment" class="com.lanou.action.StaffAction" method="findDepartment">
+            <result name="success">/list_staff.jsp</result>
+            <result name="input">/index.jsp</result>
+        </action>
+
+        <!-- 使用 json-lib 的方式返回 json 数据 -->
+        <action name="findPostByPid" class="com.lanou.action.StaffAction" method="findPostByPid">
+            <result name="input">/index.jsp</result>
+        </action>
+
+        <!-- 使用 struts-json-plugin 插件返回 json 数据 -->
+        <action name="findPostListByPid2" class="com.lanou.action.StaffAction" method="findPostListByPid2">
+            <result name="success" type="json">
+                <!-- root 对应的动作类中的属性名称 -->
+                <param name="root">postList</param>
+                <!-- json 返回的 post 职务对象中的属性 -->
+                <param name="includeProperties">
+                    \[\d\]\.id,
+                    \[\d\]\.pname
+                </param>
+            </result>
+        </action>
+    </package>
+
+</struts>
