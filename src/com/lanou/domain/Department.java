@@ -48,4 +48,6 @@ public class Department {
     public void setDname(String dname) {
         this.dname = dname;
     }
+
+    /* 批注 : 不错, 非常好, 仅次于我! */
 }
